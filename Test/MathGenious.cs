@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    public class ComplexMath : BasicMath, IComplexMath
+    public class MathGenious : BasicMath, IComplexMath
     {
         public float EvaluateExpression(string expr)
         {
             expr = expr.Replace(" ", "");
             Valid(expr);    // validate string input
             // append () outside of string as sign for evaluation
+            expr = HelpParenthesis(expr);
             expr = "(" + expr + ")";
             string[] exprArray = Arraylize(expr);
             
@@ -88,7 +89,6 @@ namespace Test
                                 break;
                             default:
                                 throw new InvalidOperationException("Operator not found");
-                        
                         }
                         vals.Push(v);
                         count--;    // may subject to change in more complex situation
@@ -104,6 +104,29 @@ namespace Test
             return vals.Pop();
         }
 
+        private string HelpParenthesis(string expr)
+        {
+            Stack<int> open = new Stack<int>();
+            for (int i = 0; i < expr.Length; i++)
+            {
+                char c = expr[i];
+                if (c == '(') { open.Push(i); }
+                else if (c == ')')
+                {
+                    if (open.Count == 0)
+                    {
+                        throw new Exception("Not matching parenthesis");
+                    }
+                    int start = open.Pop();
+                    int end = i;
+                    float temp = EvaluateExpression(expr.Substring(start + 1, end - start - 1));
+                    expr = expr.Substring(0, start) + temp.ToString() + expr.Substring(end + 1);    // update the string
+                    i = start + temp.ToString().Length; // adjust the counter to the position next to the combined number. 
+                }
+            }
+            return expr;
+        }
+
         public string[] Arraylize(string expr)
         {
             string pattern = @"(\()|(\))|(\d+)|([\+\-\/\*])";
@@ -113,10 +136,10 @@ namespace Test
 
         public void Valid(string expr)
         {
-            if (expr.Contains("(") || expr.Contains(")"))
-                throw new InvalidOperationException("Parenthesis not allowed");
             if (Regex.IsMatch(expr, @"[A-Za-z]+"))
+            {
                 throw new InvalidOperationException("Alphebet not allowed");
+            }
         }
     }
 }

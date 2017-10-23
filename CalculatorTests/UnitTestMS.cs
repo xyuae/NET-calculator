@@ -10,10 +10,12 @@ namespace CalculatorTests
      *
      * 
     */
-
+    
     [TestClass]
     public class UnitTestMS
     {
+
+        /*
         [TestMethod]
         public void TestToArray()
         {
@@ -23,6 +25,7 @@ namespace CalculatorTests
             string[] res = cm.Arraylize(input);
             Assert.IsTrue(Enumerable.SequenceEqual(res,ans));
         }
+        */
 
         [TestMethod]
         public void TestAdd()
@@ -73,7 +76,7 @@ namespace CalculatorTests
             float res = cm.EvaluateExpression(input);
 
             // Assert
-            Assert.AreEqual(cm.EvaluateExpression(input), ans);
+            Assert.AreEqual(res, ans);
         }
 
         [TestMethod]
@@ -87,7 +90,7 @@ namespace CalculatorTests
             float res = cm.EvaluateExpression(input);
 
             // Assert
-            Assert.AreEqual(cm.EvaluateExpression(input), ans);
+            Assert.AreEqual(res, ans);
         }
 
         [TestMethod]
@@ -101,7 +104,37 @@ namespace CalculatorTests
             float res = cm.EvaluateExpression(input);
 
             // Assert
-            Assert.AreEqual(cm.EvaluateExpression(input), ans);
+            Assert.AreEqual(res, ans);
+        }
+
+        
+
+        [TestMethod]
+        public void TestExpressionWithParenthesis()
+        {
+            // Arrange
+            string input = "1+3-(2+2)";
+            IComplexMath cm = new MathGenious();
+            float ans = 1 + 3 - (2 + 2);
+            // Act
+            float res = cm.EvaluateExpression(input);
+
+            // Assert
+            Assert.AreEqual(res, ans);
+        }
+
+        [TestMethod]
+        public void TestExpressionWithParenthesis2()
+        {
+            // Arrange
+            string input = "1+3-(2+2)*(3*2-2)";
+            IComplexMath cm = new MathGenious();
+            float ans = 1 + 3 - (2 + 2) * (3 * 2 - 2);
+            // Act
+            float res = cm.EvaluateExpression(input);
+
+            // Assert
+            Assert.AreEqual(res, ans);
         }
 
     }

@@ -95,6 +95,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BasicMath.cs" />
+    <Compile Include="MathGenious.cs" />
     <Compile Include="ComplexMath.cs" />
     <Compile Include="IBasicMath.cs" />
     <Compile Include="IComplexMath.cs" />
