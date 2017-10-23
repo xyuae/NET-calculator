@@ -28,7 +28,7 @@
             <Label Content="Expression: "/>
             <TextBox Text="{Binding Expression}" Width="120" VerticalContentAlignment="Center"/>
             <Button Content="Calculate" Command="{Binding CalculateExpression}" CommandParameter="{ Binding ElementName = Operator, Path = SelectedValue.Content}"  Margin="5,0,5,0.333" Click="Button_Click_1"/>
-            <TextBox Text="{Binding ExpressionResult}" Width="180" VerticalContentAlignment="Center" Margin="15,0" />
+            <TextBox Text="{Binding ExpressionResult}" Width="193" VerticalContentAlignment="Center" Margin="15,0,15,0.333" />
         </StackPanel>
     </DockPanel>
 </Window>

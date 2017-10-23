@@ -24,7 +24,7 @@ namespace Test
         {
             InitializeComponent();
             
-            LayoutRoot.DataContext = new MainWindowViewModel(new BasicMath(), new ComplexMath());
+            LayoutRoot.DataContext = new MainWindowViewModel(new BasicMath(), new MathGenious());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

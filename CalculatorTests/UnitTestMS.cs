@@ -137,5 +137,36 @@ namespace CalculatorTests
             Assert.AreEqual(res, ans);
         }
 
+        [TestMethod]
+        public void TestExpressionWithParenthesis3()
+        {
+            // Arrange
+            string input = "(2+2)*(3-2)";
+            IComplexMath cm = new MathGenious();
+            float ans = (2 + 2) * (3 - 2);
+            // Act
+            float res = cm.EvaluateExpression(input);
+
+            // Assert
+            Assert.AreEqual(res, ans);
+        }
+
+        [TestMethod]
+        public void TestExpressionWithParenthesis4()
+        {
+            // Arrange
+            string input = "(3*2)*(3-2*1)";
+            IComplexMath cm = new MathGenious();
+            float ans = (3 * 2) * (3 - 2 * 1);
+            // Act
+            float res = cm.EvaluateExpression(input);
+
+            // Assert
+            Assert.AreEqual(res, ans);
+        }
+
+        
+
+
     }
 }
