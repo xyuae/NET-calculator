@@ -11,6 +11,7 @@ namespace Test
     public class MainWindowViewModel : BindableBase
     {
         protected IBasicMath _mathLib;
+        protected IComplexMath _complexMathLib;
         private float _valueA;
         public float ValueA
         {
@@ -49,19 +50,33 @@ namespace Test
         public DelegateCommand<string> Calculate { get; set; }
         public DelegateCommand CalculateExpression { get; set; }
 
-        public MainWindowViewModel(IBasicMath mathLib)
+        public MainWindowViewModel(IBasicMath mathLib, IComplexMath complexMathLib)
         {
+            //mathLib = new BasicMath();
+            //complexMathLib = new ComplexMath();
             if (mathLib is null)
                 throw new NullReferenceException("The mathLib instance was null, please inject your implementation!");
 
+            if (complexMathLib is null)
+                throw new NullReferenceException("The complexMathLib instance was null, please inject your implementation!");
             Calculate = new DelegateCommand<string>(calculateResult);
             CalculateExpression = new DelegateCommand(calculateExpressionResult);
             _mathLib = mathLib;
+            _complexMathLib = complexMathLib;
         }
 
         private void calculateExpressionResult()
         {
-            
+            // Evaluate expression input
+            try
+            {
+                ExpressionResult = _complexMathLib.EvaluateExpression(Expression);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                ExpressionResult = float.NaN;
+            }
         }
 
         private void calculateResult(string op)
