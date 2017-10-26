@@ -9,7 +9,7 @@ namespace Test
 {
     public class ComplexMath : BasicMath, IComplexMath
     {
-        public float EvaluateExpression(string expr)
+        public virtual float EvaluateExpression(string expr)
         {
             expr = expr.Replace(" ", "");
             Valid(expr);    // validate string input
@@ -46,7 +46,7 @@ namespace Test
                     }
                     catch
                     {
-                        throw new InvalidCastException("Error: Non matching number after operator");
+                        throw new InvalidOperationException("Error: Non matching number after operator, negative number is not supported");
                     }
                     
                 }
